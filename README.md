@@ -9,7 +9,7 @@ Extender is a build server that builds native extensions of the Defold engine. T
 ---
 
 ## Running as a stand-alone server on macOS
-The stand-alone server is currently used on a machine runing macOS. The server is used to build darwin targets (macOS+iOS) using the Apple tools (XCode+Apple Clang). It is also possible to use this setup when developing on macOS.
+The stand-alone server is currently used on a machine runing macOS. The server is used to build darwin targets (macOS+iOS+tvOS) using the Apple tools (XCode+Apple Clang). It is also possible to use this setup when developing on macOS.
 
 ### Prerequisites
 Ensure that on host is installed:
@@ -21,6 +21,8 @@ Before running Extender you need to have prepackaged toolchains and sdks. Full i
 Ensure that you have the following tools packaged:
 * iPhoneOS27.1.sdk
 * iPhoneSimulator27.1.sdk
+* AppleTVOS27.0.sdk
+* AppleTVSimulator27.0.sdk
 * MacOSX27.0.sdk
 * XcodeDefault27.1.xctoolchain.darwin
 

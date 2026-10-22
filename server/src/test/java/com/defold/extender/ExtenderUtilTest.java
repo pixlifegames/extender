@@ -60,6 +60,13 @@ public class ExtenderUtilTest {
             assertTrue(ExtenderUtil.isIOSTarget(platform), platform);
             assertTrue(ExtenderUtil.isAppleTarget(platform), platform);
             assertFalse(ExtenderUtil.isMacOSTarget(platform), platform);
+            assertFalse(ExtenderUtil.isTvOSTarget(platform), platform);
+        }
+        for (String platform : List.of("arm64-tvos", "arm64_sim-tvos")) {
+            assertTrue(ExtenderUtil.isTvOSTarget(platform), platform);
+            assertTrue(ExtenderUtil.isAppleTarget(platform), platform);
+            assertFalse(ExtenderUtil.isIOSTarget(platform), platform);
+            assertFalse(ExtenderUtil.isMacOSTarget(platform), platform);
         }
         for (String platform : List.of("arm64-osx", "x86_64-osx")) {
             assertTrue(ExtenderUtil.isMacOSTarget(platform), platform);

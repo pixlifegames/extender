@@ -19,7 +19,7 @@ import java.util.List;
 public class ManifestMergeTool {
 
     public enum Platform {
-        ANDROID, IOS, OSX, WEB, UNKNOWN
+        ANDROID, IOS, TVOS, OSX, WEB, UNKNOWN
     }
 
     private static Logger logger = Logger.getLogger(ManifestMergeTool.class.getName());
@@ -83,6 +83,7 @@ public class ManifestMergeTool {
         switch (platform) {
             case ANDROID:  mergeAndroid(main, libraries.toArray(new File[0]), output); break;
             case IOS:
+            case TVOS:
             case OSX:      mergeApple(main, libraries.toArray(new File[0]), output); break;
             case WEB:      mergeHtml(main, libraries.toArray(new File[0]), output); break;
             default:
@@ -125,6 +126,9 @@ public class ManifestMergeTool {
                             break;
                         case "ios":
                             parsed.platform = Platform.IOS;
+                            break;
+                        case "tvos":
+                            parsed.platform = Platform.TVOS;
                             break;
                         case "osx":
                             parsed.platform = Platform.OSX;

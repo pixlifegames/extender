@@ -44,6 +44,10 @@ public class WebSecurityConfig {
                     http.authorizeHttpRequests((authorizeHttpRequest) -> authorizeHttpRequest.requestMatchers("/build_async/arm64_sim-ios/**").hasRole("IOS")).httpBasic(withDefaults());
                     http.authorizeHttpRequests((authorizeHttpRequest) -> authorizeHttpRequest.requestMatchers("/build_async/x86_64-ios/**").hasRole("IOS")).httpBasic(withDefaults());
                     break;
+                case "tvos":
+                    http.authorizeHttpRequests((authorizeHttpRequest) -> authorizeHttpRequest.requestMatchers("/build_async/arm64-tvos/**").hasRole("TVOS")).httpBasic(withDefaults());
+                    http.authorizeHttpRequests((authorizeHttpRequest) -> authorizeHttpRequest.requestMatchers("/build_async/arm64_sim-tvos/**").hasRole("TVOS")).httpBasic(withDefaults());
+                    break;
                 case "linux":
                     http.authorizeHttpRequests((authorizeHttpRequest) -> authorizeHttpRequest.requestMatchers("/build_async/x86_64-linux/**").hasRole("LINUX")).httpBasic(withDefaults());
                     http.authorizeHttpRequests((authorizeHttpRequest) -> authorizeHttpRequest.requestMatchers("/build_async/arm64-linux/**").hasRole("LINUX")).httpBasic(withDefaults());

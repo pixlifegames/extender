@@ -305,6 +305,37 @@ public class ManifestMergeToolTest {
         assertEquals(expected, merged);
     }
 
+    // tvOS manifests are Info.plist files, merged the same way as on iOS
+    @Test
+    @Tag("ios")
+    public void testMergeTvOS() throws IOException {
+        createDefaultFiles(Platform.IOS);
+
+        String libManifest = ""
+                + "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
+                + "<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n"
+                + "<plist version=\"1.0\">\n"
+                + "<dict>\n"
+                + "    <key>UIRequiredDeviceCapabilities</key>\n"
+                + "    <array>\n"
+                + "        <string>arm64</string>\n"
+                + "    </array>\n"
+                + "</dict>\n"
+                + "</plist>\n";
+
+        createFile(contentRoot, LIB_MANIFEST_PATH, libManifest);
+
+        ManifestMergeTool.merge(ManifestMergeTool.Platform.IOS, this.main, this.target, this.libraries);
+        String mergedIOS = readFile(this.target);
+
+        ManifestMergeTool.merge(ManifestMergeTool.Platform.TVOS, this.main, this.target, this.libraries);
+        String mergedTvOS = readFile(this.target);
+
+        assertEquals(mergedIOS, mergedTvOS);
+        assertTrue(mergedTvOS.contains("<key>UIRequiredDeviceCapabilities</key>"));
+        assertTrue(mergedTvOS.contains("<key>NSAppTransportSecurity</key>"));
+    }
+
     @Test
     @Tag("ios")
     public void testMergeIOSMergeMarkers() throws IOException {
@@ -884,6 +915,12 @@ public class ManifestMergeToolTest {
     public void testParseArgsPlatformIos() {
         ManifestMergeTool.ParsedArgs parsed = ManifestMergeTool.parseArgs(new String[]{"--platform", "ios"});
         assertEquals(Platform.IOS, parsed.platform);
+    }
+
+    @Test
+    public void testParseArgsPlatformTvos() {
+        ManifestMergeTool.ParsedArgs parsed = ManifestMergeTool.parseArgs(new String[]{"--platform", "tvos"});
+        assertEquals(Platform.TVOS, parsed.platform);
     }
 
     @Test
