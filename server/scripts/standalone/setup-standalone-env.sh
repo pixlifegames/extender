@@ -195,6 +195,8 @@ if [[ $(uname) == "Darwin" ]]; then
     PACKAGES=(
         iPhoneOS${IOS_VERSION}.sdk
         iPhoneSimulator${IOS_VERSION}.sdk
+        AppleTVOS${TVOS_VERSION}.sdk
+        AppleTVSimulator${TVOS_VERSION}.sdk
         MacOSX${MACOS_VERSION}.sdk
         XcodeDefault${XCODE_VERSION}.xctoolchain.darwin
     )
